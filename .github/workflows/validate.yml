@@ -1,0 +1,18 @@
+# Runs on every pull request. Make it required in your ruleset for the bonus stage.
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Check member files and conflict markers
+        run: python3 .github/scripts/validate.py
